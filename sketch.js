@@ -409,4 +409,32 @@ function keyPressed() {
   }
 }
 
-function mousePressed() {}
+function mousePressed() {
+  if (
+    (snake.direction() == "U" || snake.direction() == "D") &&
+    mouseX > snake.getX()
+  ) {
+    snake.goRight();
+    return;
+  }
+  if (
+    (snake.direction() == "U" || snake.direction() == "D") &&
+    mouseX < snake.getX()
+  ) {
+    snake.goLeft();
+    return;
+  }
+  if (
+    (snake.direction() != "L" || snake.direction() != "R") &&
+    mouseY < snake.getY()
+  ) {
+    snake.goUp();
+    return;
+  }
+  if (
+    (snake.direction() != "L" || snake.direction() != "R") &&
+    mouseY > snake.getY()
+  ) {
+    snake.goDown();
+  }
+}
