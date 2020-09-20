@@ -48,7 +48,14 @@ function set_levels() {
 }
 
 function setStats() {
-  stats = new Stats(200, 50, 100, STATS_HEIGHT, LIVES, levels[currLevelIndex]);
+  stats = new Stats(
+    STATS_POS_X,
+    STATS_POS_Y,
+    STATS_WIDTH,
+    STATS_HEIGHT,
+    MAX_LIVES,
+    levels[currLevelIndex]
+  );
 }
 
 function setSnake() {
@@ -172,6 +179,12 @@ function resetGame() {
   setObstacles();
   setBombs();
   setWalkers();
+  loop();
+}
+
+function resetLevel() {
+  game_over = false;
+  snake.reset();
   loop();
 }
 
@@ -387,7 +400,14 @@ function keyPressed() {
     console.log("bomb deployed");
   }
   if (game_over && key == " ") {
-    resetGame();
+    // Check if snake lives is zero
+    console.log(stats.GetLives());
+    if (stats.GetLives() == 0) {
+      resetGame();
+    } else {
+      stats.DecrementLives();
+      resetLevel();
+    }
   }
   if (key == "S") {
     snake.stop();
@@ -412,28 +432,28 @@ function keyPressed() {
 function mousePressed() {
   if (
     (snake.direction() == "U" || snake.direction() == "D") &&
-    mouseX > snake.getX()
+    mouseX > snake.GetX()
   ) {
     snake.goRight();
     return;
   }
   if (
     (snake.direction() == "U" || snake.direction() == "D") &&
-    mouseX < snake.getX()
+    mouseX < snake.GetX()
   ) {
     snake.goLeft();
     return;
   }
   if (
     (snake.direction() != "L" || snake.direction() != "R") &&
-    mouseY < snake.getY()
+    mouseY < snake.GetY()
   ) {
     snake.goUp();
     return;
   }
   if (
     (snake.direction() != "L" || snake.direction() != "R") &&
-    mouseY > snake.getY()
+    mouseY > snake.GetY()
   ) {
     snake.goDown();
   }

@@ -1,5 +1,5 @@
-class WhiteWalker extends Walker{
-  constructor(x, y, w, col, speed){
+class WhiteWalker extends Walker {
+  constructor(x, y, w, col, speed) {
     super(x, y, w, col, speed);
     // this.pos = createVector(x, y);
     // this.w = w;
@@ -15,82 +15,75 @@ class WhiteWalker extends Walker{
   //   rect(this.pos.x, this.pos.y, this.w, this.w);
   // }
 
-  update(){
+  update() {
     this.pos.add(this.velocity);
     this.setDirectionTowardSnake();
   }
 
-  checkEdges(){
-    if (this.pos.x < FRAME_X){
+  checkEdges() {
+    if (this.pos.x < FRAME_X) {
       this.pos.x = FRAME_X + FRAME_WIDTH;
     }
-    if (this.pos.x > FRAME_X + FRAME_WIDTH - this.w){
+    if (this.pos.x > FRAME_X + FRAME_WIDTH - this.w) {
       this.pos.x = FRAME_X;
     }
-    if (this.pos.y < FRAME_Y){
+    if (this.pos.y < FRAME_Y) {
       this.pos.y = FRAME_Y + FRAME_HEIGHT;
     }
-    if (this.pos.y > FRAME_Y + FRAME_HEIGHT - this.w){
+    if (this.pos.y > FRAME_Y + FRAME_HEIGHT - this.w) {
       this.pos.y = FRAME_Y;
     }
   }
 
-  setDirectionTowardSnake(){
-    if (frameCount % (fps * grey_walker_change_direction_interval) == 0){
+  setDirectionTowardSnake() {
+    if (frameCount % (fps * grey_walker_change_direction_interval) == 0) {
       var diff_x = abs(this.pos.x - snake.head_pos.x);
       var diff_y = abs(this.pos.y - snake.head_pos.y);
 
       // white walker is one-tile from snake
-      if (diff_x == TILE_SIZE){
-        if (this.pos.x < snake.head_pos.x){
+      if (diff_x == TILE_SIZE) {
+        if (this.pos.x < snake.head_pos.x) {
           this.goRight();
-        }
-        else{
+        } else {
           this.goLeft();
         }
-      }
-      else if (diff_y == TILE_SIZE){
-        if (this.pos.y < snake.head_pos.y){
+      } else if (diff_y == TILE_SIZE) {
+        if (this.pos.y < snake.head_pos.y) {
           this.goDown();
-        }
-        else{
+        } else {
           this.goUp();
         }
       }
 
       // white walker is left-up from the snake
-      if (this.pos.x < snake.head_pos.x && this.pos.y < snake.head_pos.y){
-        if (diff_x < diff_y){
+      if (this.pos.x < snake.head_pos.x && this.pos.y < snake.head_pos.y) {
+        if (diff_x < diff_y) {
           this.goDown();
-        }
-        else{
+        } else {
           this.goRight();
         }
       }
       // white walker is left-down from the snake
-      if (this.pos.x < snake.head_pos.x && this.pos.y > snake.head_pos.y){
-        if (diff_x < diff_y){
+      if (this.pos.x < snake.head_pos.x && this.pos.y > snake.head_pos.y) {
+        if (diff_x < diff_y) {
           this.goUp();
-        }
-        else{
+        } else {
           this.goRight();
         }
       }
       // white walker is right-up from the snake
-      if (this.pos.x > snake.head_pos.x && this.pos.y < snake.head_pos.y){
-        if (diff_x < diff_y){
+      if (this.pos.x > snake.head_pos.x && this.pos.y < snake.head_pos.y) {
+        if (diff_x < diff_y) {
           this.goDown();
-        }
-        else{
+        } else {
           this.goLeft();
         }
       }
       // white walker is right-down the snake
-      if (this.pos.x > snake.head_pos.x && this.pos.y > snake.head_pos.y){
-        if (diff_x < diff_y){
+      if (this.pos.x > snake.head_pos.x && this.pos.y > snake.head_pos.y) {
+        if (diff_x < diff_y) {
           this.goUp();
-        }
-        else{
+        } else {
           this.goLeft();
         }
       }
@@ -117,12 +110,12 @@ class WhiteWalker extends Walker{
   //   this.velocity = createVector(0, 0);
   // }
 
-  isInFrame(){
-    if (this.pos.x < FRAME_X || this.pos.x > FRAME_X + FRAME_WIDTH - this.w){
+  isInFrame() {
+    if (this.pos.x < FRAME_X || this.pos.x > FRAME_X + FRAME_WIDTH - this.w) {
       this.stop();
       return false;
     }
-    if (this.pos.y < FRAME_Y || this.pos.y > FRAME_Y + FRAME_HEIGHT - this.w){
+    if (this.pos.y < FRAME_Y || this.pos.y > FRAME_Y + FRAME_HEIGHT - this.w) {
       this.stop();
       return false;
     }

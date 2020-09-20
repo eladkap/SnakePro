@@ -7,6 +7,7 @@ class Snake {
     this.velocity = createVector(0, 0);
     this.col = col;
     this.life = 100;
+    this.lives = MAX_LIVES;
     this.isWallak = false;
     this.isTransparent = false;
     this.isUnharmfull = false;
@@ -19,18 +20,32 @@ class Snake {
     }
   }
 
-  getX() {
+  GetX() {
     return this.head_pos.x;
   }
 
-  getY() {
+  GetY() {
     return this.head_pos.y;
+  }
+
+  GetLives() {
+    return this.lives;
+  }
+
+  IncrementLives() {
+    this.lives++;
+  }
+
+  DecrementLives() {
+    this.lives--;
   }
 
   reset() {
     this.initTail();
-    let snake_x = FRAME_X + int(random(0, FRAME_COLS)) * TILE_SIZE;
-    let snake_y = FRAME_Y + int(random(0, FRAME_ROWS)) * TILE_SIZE;
+    // let snake_x = FRAME_X + int(random(0, FRAME_COLS)) * TILE_SIZE;
+    // let snake_y = FRAME_Y + int(random(0, FRAME_ROWS)) * TILE_SIZE;
+    let snake_x = FRAME_X + (FRAME_COLS * TILE_SIZE) / 2;
+    let snake_y = FRAME_Y + (FRAME_ROWS * TILE_SIZE) / 2;
     this.head_pos = createVector(snake_x, snake_y);
     this.stop();
   }
